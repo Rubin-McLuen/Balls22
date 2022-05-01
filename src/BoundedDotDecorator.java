@@ -20,11 +20,11 @@ public class BoundedDotDecorator extends MovingDecorator{
     }
 
     @Override
-    public synchronized void move() {
+    public synchronized void move() throws OutOfBoundsException {
         if (getLeft() < topLeft.x || getRight()>bottomRight.x){
             md.setMotion(-md.getDx(),md.getDy());
         }
-        if (getTop() < topLeft.y || getBottom() > bottomRight.y ){
+        if (getTop() < topLeft.y){
             md.setMotion(md.getDx(),-md.getDy());
         }
         for (Obstacle o: obstacles) {
@@ -32,8 +32,6 @@ public class BoundedDotDecorator extends MovingDecorator{
                 if ((getLeft() < o.right()) && (getRight() > o.left())) {
                     setMotion(getDx(), -getDy());
                     o.hitBy(this);
-                    System.out.println("ball left: " + getLeft() + "\n" + "brick right: " + o.right() +
-                            "\nball right: " + getRight() + "\n" + "brick left: " + o.left() + "\n");
                 }
             }
             if ((getRight() == o.left()) || (getLeft() == o.right())) {
@@ -44,5 +42,8 @@ public class BoundedDotDecorator extends MovingDecorator{
             }
         }
         md.move();
+        if (getTop() > bottomRight.y ){
+            throw new OutOfBoundsException();
+        }
     }
 }

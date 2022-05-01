@@ -37,15 +37,26 @@ public class LaunchPanel extends JPanel {
         Point c = new Point(w/2, h-30);
         launchPoint.setCenter(c);
         launchPoint.paint(g);
+        ArrayList<MovingDot> remove = new ArrayList<MovingDot>();
 
         for (Obstacle o: obstacles){
             o.paint(g);
         }
 
         for (MovingDot d: dots) {
-            d.move();
+            try {
+                d.move();
+            } catch (OutOfBoundsException e) {
+                remove.add(d);
+            }
             d.paint(g);
         }
+
+        for (MovingDot d: remove){
+            dots.remove(d);
+        }
+        remove.clear();
+        System.out.println(dots.size());
 
         try {
             Thread.sleep(10);

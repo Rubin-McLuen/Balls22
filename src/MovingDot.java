@@ -46,14 +46,18 @@ public class MovingDot extends Dot implements Runnable{
         dx = x;
         dy = y;
     }
-    public void move(){
+    public void move() throws OutOfBoundsException {
         x += dx;
         y += dy;
     }
 
     public void run() {
         while (true) {
-            move();
+            try {
+                move();
+            } catch (OutOfBoundsException e) {
+
+            }
             try {
                 Thread.sleep(5);
             } catch (InterruptedException e) {

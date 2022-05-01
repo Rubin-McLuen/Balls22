@@ -39,13 +39,11 @@ public class LaunchPanel extends JPanel {
         launchPoint.paint(g);
 
         for (MovingDot d: dots) {
-            for (Obstacle o : obstacles) {
-                if (d.getRegion().intersects(o.getRegion())) {
-                    o.hitBy(d);
-                }
-                d.move();
-                d.paint(g);
-            }
+//            if (d.getRegion().intersects(o.getRegion())) {
+//                o.hitBy(d);
+//            }
+            d.move();
+            d.paint(g);
         }
 
         for (Obstacle o: obstacles){
@@ -64,7 +62,7 @@ public class LaunchPanel extends JPanel {
         System.out.println("Generate Dot");
         MovingDot  d = new MovingDot(launchPoint.getCenter(), p, 1);
         //d = new GravityDotDecorator(d);
-        d = new BoundedDotDecorator(d, new Point(getWidth(),getHeight()) );
+        d = new BoundedDotDecorator(d, new Point(getWidth(),getHeight()), obstacles);
         dots.add(d);
         Thread t = new Thread(d);
         t.start();

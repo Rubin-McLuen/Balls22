@@ -24,17 +24,17 @@ public class Obstacle {
     }
 
     public synchronized void hitBy(MovingDot d) {
-        if ((d.getTop() > top()) && (d.getBottom() < bottom())) {
-            d.setMotion(-d.getDx(), d.getDy());
-        } else {
-            if ((d.getLeft() > left()) && (d.getRight() < right())) {
-                d.setMotion(d.getDx(), -d.getDy());
-            }
-            else{
-                d.setMotion(-d.getDx(), d.getDy());
-                d.setMotion(d.getDx(), -d.getDy());
-            }
-        }
+//        if ((d.getTop() > top()) && (d.getBottom() < bottom())) {
+//            d.setMotion(-d.getDx(), d.getDy());
+//        } else {
+//            if ((d.getLeft() > left()) && (d.getRight() < right())) {
+//                d.setMotion(d.getDx(), -d.getDy());
+//            }
+//            else{
+//                d.setMotion(-d.getDx(), d.getDy());
+//                d.setMotion(d.getDx(), -d.getDy());
+//            }
+//        }
 
     }
 

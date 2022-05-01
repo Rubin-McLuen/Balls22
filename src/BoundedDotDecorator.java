@@ -1,29 +1,44 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 public class BoundedDotDecorator extends MovingDecorator{
     private Point topLeft;
     private Point bottomRight;
     private MovingDot md;
+    private ArrayList<Obstacle> obstacles;
 
-    public BoundedDotDecorator(MovingDot md, Point bottomRight) {
-        this(md, new Point(0,0), bottomRight);
+    public BoundedDotDecorator(MovingDot md, Point bottomRight, ArrayList<Obstacle> obstacles) {
+        this(md, new Point(0,0), bottomRight, obstacles);
     }
 
-    public BoundedDotDecorator(MovingDot md, Point topLeft, Point bottomRight) {
+    public BoundedDotDecorator(MovingDot md, Point topLeft, Point bottomRight, ArrayList<Obstacle> obstacles) {
         super (md);
         this.bottomRight = bottomRight;
         this.topLeft = topLeft;
         this.md = md;
+        this.obstacles = obstacles;
     }
 
     @Override
-    public void move() {
+    public synchronized void move() {
         if (getLeft() < topLeft.x || getRight()>bottomRight.x){
             md.setMotion(-md.getDx(),md.getDy());
         }
         if (getTop() < topLeft.y || getBottom() > bottomRight.y ){
             md.setMotion(md.getDx(),-md.getDy());
         }
+        for (Obstacle o: obstacles){
+            if ((getBottom() == o.top()) || (getTop() == o.bottom())) {
+                if ((getLeft() < o.right()) && (getRight() > o.left()))
+                    setMotion(getDx(), -getDy());
+            }
+            if ((getRight() == o.left()) || (getLeft() == o.right())) {
+                if ((getBottom() > o.top()) && (getTop() < o.bottom())) {
+                    setMotion(-getDx(), getDy());
+                }
+            }
+        }
+
         md.move();
     }
 }

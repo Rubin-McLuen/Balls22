@@ -74,6 +74,9 @@ public class LaunchPanel extends JPanel {
             e.printStackTrace();
         }
         repaint();
+        if (obstacles.size() == 0){
+            g.drawString("You Win!", 250, 250);
+        }
     }
 
     private void generateDot(Point p){

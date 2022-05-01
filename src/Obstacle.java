@@ -13,7 +13,7 @@ public class Obstacle {
         size = 50;
         region = new Rectangle(center.x-size/2,center.y-size/2, size, size);
         color = color.RED;
-        health = 10;
+        health = 1;
     }
 
     public void paint(Graphics g) throws BrokenBlockException {
@@ -21,7 +21,7 @@ public class Obstacle {
         g.fillRect(region.x,region.y, region.width,region.height);
         g.setColor(Color.BLACK);
         g.drawString(Integer.toString(health), center.x-8, center.y+5);
-        if (health == 0){
+        if (health <= 0){
             throw new BrokenBlockException();
         }
     }

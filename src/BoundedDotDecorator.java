@@ -27,11 +27,14 @@ public class BoundedDotDecorator extends MovingDecorator{
         if (getTop() < topLeft.y || getBottom() > bottomRight.y ){
             md.setMotion(md.getDx(),-md.getDy());
         }
-        for (Obstacle o: obstacles){
+        for (Obstacle o: obstacles) {
             if ((getBottom() == o.top()) || (getTop() == o.bottom())) {
-                if ((getLeft() < o.right()) && (getRight() > o.left()))
+                if ((getLeft() < o.right()) && (getRight() > o.left())) {
                     setMotion(getDx(), -getDy());
                     o.hitBy(this);
+                    System.out.println("ball left: " + getLeft() + "\n" + "brick right: " + o.right() +
+                            "\nball right: " + getRight() + "\n" + "brick left: " + o.left() + "\n");
+                }
             }
             if ((getRight() == o.left()) || (getLeft() == o.right())) {
                 if ((getBottom() > o.top()) && (getTop() < o.bottom())) {
@@ -40,7 +43,6 @@ public class BoundedDotDecorator extends MovingDecorator{
                 }
             }
         }
-
         md.move();
     }
 }

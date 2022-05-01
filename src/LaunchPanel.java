@@ -1,8 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class LaunchPanel extends JPanel {
 
@@ -10,6 +13,7 @@ public class LaunchPanel extends JPanel {
     ArrayList<Obstacle> obstacles;
     Dot launchPoint;
     Point s;
+    int numDots = 10;
 
 
     public LaunchPanel() {
@@ -59,6 +63,9 @@ public class LaunchPanel extends JPanel {
 
         for (MovingDot d: remove){
             dots.remove(d);
+            numDots--;
+
+            System.out.println(numDots + " " + dots.size());
         }
         remove.clear();
 
@@ -75,7 +82,26 @@ public class LaunchPanel extends JPanel {
         }
         repaint();
         if (obstacles.size() == 0){
-            g.drawString("You Win!", 250, 250);
+            g.setColor(Color.BLUE);
+            g.drawString("You Win!", 220, 245);
+//            Timer timer = new Timer(3000, new ActionListener() {
+//                public void actionPerformed(ActionEvent evt) {
+//                    repaint();
+//                }
+//            });
+//            timer.start();
+            System.exit(0);
+        }
+        if (numDots <= 0 && dots.size() == 0){
+            g.setColor(Color.RED);
+            g.drawString("You Lose!", 230, 245);
+//            Timer timer = new Timer(3000, new ActionListener() {
+//                public void actionPerformed(ActionEvent evt) {
+//                    repaint();
+//                }
+//            });
+//            timer.start();
+            System.exit(0);
         }
     }
 

@@ -6,17 +6,21 @@ public class Obstacle {
     private Rectangle region;
     private int size;
     private Color color;
+    private int health;
 
     public Obstacle(Point center) {
         this.center = center;
         size = 50;
         region = new Rectangle(center.x-size/2,center.y-size/2, size, size);
         color = color.RED;
+        health = 10;
     }
 
     public void paint(Graphics g){
         g.setColor(color);
         g.fillRect(region.x,region.y, region.width,region.height);
+        g.setColor(Color.BLACK);
+        g.drawString(Integer.toString(health), center.x-8, center.y+5);
     }
 
     public Rectangle getRegion() {
@@ -24,17 +28,7 @@ public class Obstacle {
     }
 
     public synchronized void hitBy(MovingDot d) {
-//        if ((d.getTop() > top()) && (d.getBottom() < bottom())) {
-//            d.setMotion(-d.getDx(), d.getDy());
-//        } else {
-//            if ((d.getLeft() > left()) && (d.getRight() < right())) {
-//                d.setMotion(d.getDx(), -d.getDy());
-//            }
-//            else{
-//                d.setMotion(-d.getDx(), d.getDy());
-//                d.setMotion(d.getDx(), -d.getDy());
-//            }
-//        }
+        health--;
 
     }
 

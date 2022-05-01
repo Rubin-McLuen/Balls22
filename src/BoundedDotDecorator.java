@@ -31,10 +31,12 @@ public class BoundedDotDecorator extends MovingDecorator{
             if ((getBottom() == o.top()) || (getTop() == o.bottom())) {
                 if ((getLeft() < o.right()) && (getRight() > o.left()))
                     setMotion(getDx(), -getDy());
+                    o.hitBy(this);
             }
             if ((getRight() == o.left()) || (getLeft() == o.right())) {
                 if ((getBottom() > o.top()) && (getTop() < o.bottom())) {
                     setMotion(-getDx(), getDy());
+                    o.hitBy(this);
                 }
             }
         }

@@ -39,9 +39,13 @@ public class LaunchPanel extends JPanel {
         launchPoint.paint(g);
 
         for (MovingDot d: dots) {
-//            if (d.getRegion().intersects(o.getRegion())) {
-//                o.hitBy(d);
-//            }
+            for (Obstacle o: obstacles) {
+                if (d.getRegion().intersects(o.getRegion())) {
+                    System.out.println("yes");
+                    o.hitBy(d);
+                    o.paint(g);
+                }
+            }
             d.move();
             d.paint(g);
         }

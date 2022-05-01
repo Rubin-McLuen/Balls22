@@ -46,7 +46,7 @@ public class MovingDot extends Dot implements Runnable{
         dx = x;
         dy = y;
     }
-    public void move() throws OutOfBoundsException {
+    public void move() throws OutOfBoundsException{
         x += dx;
         y += dy;
     }

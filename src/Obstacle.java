@@ -16,20 +16,22 @@ public class Obstacle {
         health = 10;
     }
 
-    public void paint(Graphics g){
+    public void paint(Graphics g) throws BrokenBlockException {
         g.setColor(color);
         g.fillRect(region.x,region.y, region.width,region.height);
         g.setColor(Color.BLACK);
         g.drawString(Integer.toString(health), center.x-8, center.y+5);
+        if (health == 0){
+            throw new BrokenBlockException();
+        }
     }
 
     public Rectangle getRegion() {
         return region;
     }
 
-    public synchronized void hitBy(MovingDot d) {
+    public synchronized void hitBy(MovingDot d){
         health--;
-
     }
 
     public int top(){

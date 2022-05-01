@@ -19,7 +19,7 @@ public abstract class  MovingDecorator extends MovingDot{
     }
 
     @Override
-    public void move() throws OutOfBoundsException {
+    public void move() throws OutOfBoundsException{
         md.move();
     }
 

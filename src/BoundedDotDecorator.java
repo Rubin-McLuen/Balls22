@@ -20,7 +20,7 @@ public class BoundedDotDecorator extends MovingDecorator{
     }
 
     @Override
-    public synchronized void move() throws OutOfBoundsException {
+    public synchronized void move() throws OutOfBoundsException{
         if (getLeft() < topLeft.x || getRight()>bottomRight.x){
             md.setMotion(-md.getDx(),md.getDy());
         }

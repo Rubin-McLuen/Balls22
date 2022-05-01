@@ -38,9 +38,14 @@ public class LaunchPanel extends JPanel {
         launchPoint.setCenter(c);
         launchPoint.paint(g);
         ArrayList<MovingDot> remove = new ArrayList<MovingDot>();
+        ArrayList<Obstacle> removeObstacles = new ArrayList<Obstacle>();
 
         for (Obstacle o: obstacles){
-            o.paint(g);
+            try {
+                o.paint(g);
+            } catch (BrokenBlockException e) {
+                removeObstacles.add(o);
+            }
         }
 
         for (MovingDot d: dots) {
@@ -56,7 +61,12 @@ public class LaunchPanel extends JPanel {
             dots.remove(d);
         }
         remove.clear();
-        System.out.println(dots.size());
+
+        for (Obstacle o: removeObstacles){
+            obstacles.remove(o);
+        }
+        removeObstacles.clear();
+
 
         try {
             Thread.sleep(10);
@@ -67,7 +77,6 @@ public class LaunchPanel extends JPanel {
     }
 
     private void generateDot(Point p){
-        System.out.println("Generate Dot");
         MovingDot  d = new MovingDot(launchPoint.getCenter(), p, 1);
         d = new BoundedDotDecorator(d, new Point(getWidth(),getHeight()), obstacles);
         dots.add(d);

@@ -13,7 +13,7 @@ public class LaunchPanel extends JPanel {
     ArrayList<Obstacle> obstacles;
     Dot launchPoint;
     Point s;
-    int numDots = 10;
+    int numDots = 30;
 
 
     public LaunchPanel() {
@@ -43,6 +43,7 @@ public class LaunchPanel extends JPanel {
         launchPoint.paint(g);
         ArrayList<MovingDot> remove = new ArrayList<MovingDot>();
         ArrayList<Obstacle> removeObstacles = new ArrayList<Obstacle>();
+        g.drawString(String.valueOf(numDots),w/2, h-40);
 
         for (Obstacle o: obstacles){
             try {
@@ -63,9 +64,6 @@ public class LaunchPanel extends JPanel {
 
         for (MovingDot d: remove){
             dots.remove(d);
-            numDots--;
-
-            System.out.println(numDots + " " + dots.size());
         }
         remove.clear();
 
@@ -90,7 +88,7 @@ public class LaunchPanel extends JPanel {
 //                }
 //            });
 //            timer.start();
-            System.exit(0);
+//            System.exit(0);
         }
         if (numDots <= 0 && dots.size() == 0){
             g.setColor(Color.RED);
@@ -101,16 +99,19 @@ public class LaunchPanel extends JPanel {
 //                }
 //            });
 //            timer.start();
-            System.exit(0);
+//            System.exit(0);
         }
     }
 
     private void generateDot(Point p){
-        MovingDot  d = new MovingDot(launchPoint.getCenter(), p, 1);
-        d = new BoundedDotDecorator(d, new Point(getWidth(),getHeight()), obstacles);
-        dots.add(d);
-        Thread t = new Thread(d);
-        t.start();
+        if (numDots > 0) {
+            MovingDot d = new MovingDot(launchPoint.getCenter(), p, 1);
+            d = new BoundedDotDecorator(d, new Point(getWidth(), getHeight()), obstacles);
+            dots.add(d);
+            numDots--;
+            Thread t = new Thread(d);
+            t.start();
+        }
     }
 
     private class MousePlay implements MouseListener {

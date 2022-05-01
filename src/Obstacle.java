@@ -13,7 +13,7 @@ public class Obstacle {
         size = 50;
         region = new Rectangle(center.x-size/2,center.y-size/2, size, size);
         color = color.RED;
-        health = 1;
+        health = 10;
     }
 
     public void paint(Graphics g) throws BrokenBlockException {

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class LaunchPanel extends JPanel {
 
     ArrayList<MovingDot> dots;
-    Obstacle o;
+    ArrayList<Obstacle> obstacles;
     Dot launchPoint;
     Point s;
 
@@ -15,7 +15,13 @@ public class LaunchPanel extends JPanel {
     public LaunchPanel() {
         setPreferredSize(new Dimension(500,500));
         dots = new ArrayList<MovingDot>();
-        o = new Obstacle(new Point(150,150));
+        obstacles = new ArrayList<Obstacle>();
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 3; j++){
+                Obstacle o = new Obstacle(new Point(i*75 + 100,j*75 + 50));
+                obstacles.add(o);
+            }
+        }
         s = new Point(250,250);
         launchPoint =new Dot(s);
         launchPoint.setColor(Color.GREEN);
@@ -33,16 +39,18 @@ public class LaunchPanel extends JPanel {
         launchPoint.paint(g);
 
         for (MovingDot d: dots) {
-
-            if (d.getRegion().intersects(o.getRegion())) {
-                o.hitBy(d);
+            for (Obstacle o : obstacles) {
+                if (d.getRegion().intersects(o.getRegion())) {
+                    o.hitBy(d);
+                }
+                d.move();
+                d.paint(g);
             }
-
-            d.move();
-            d.paint(g);
         }
 
-        o.paint(g);
+        for (Obstacle o: obstacles){
+            o.paint(g);
+        }
 
         try {
             Thread.sleep(10);

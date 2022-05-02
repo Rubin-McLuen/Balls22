@@ -8,12 +8,12 @@ public class Obstacle {
     private Color color;
     private int health;
 
-    public Obstacle(Point center) {
+    public Obstacle(Point center, int size, int health, Color color) {
         this.center = center;
-        size = 50;
+        this.size = size;
         region = new Rectangle(center.x-size/2,center.y-size/2, size, size);
-        color = color.RED;
-        health = 10;
+        this.color = color;
+        this.health = health;
     }
 
     public void paint(Graphics g) throws BrokenBlockException {

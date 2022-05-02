@@ -1,0 +1,6 @@
+Instructions:
+    You're given a set number of balls, which is shown next to the starting dot.
+    You have to shoot the balls at the blocks, and try to break all of them with
+    your balls.
+    If you can break all of the blocks with the balls, you win.
+    If any of the blocks are left standing after all of your balls disappear, you lose.

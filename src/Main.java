@@ -27,7 +27,7 @@ public class Main {
         medium.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                String difficulty = "easy";
+                String difficulty = "medium";
                 JFrame frame2 = new JFrame();
                 frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame2.getContentPane().add(new LaunchPanel(difficulty));
@@ -39,7 +39,7 @@ public class Main {
         hard.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                String difficulty = "easy";
+                String difficulty = "hard";
                 JFrame frame2 = new JFrame();
                 frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame2.getContentPane().add(new LaunchPanel(difficulty));

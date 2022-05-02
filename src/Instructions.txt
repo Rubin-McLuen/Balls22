@@ -1,4 +1,5 @@
 Instructions:
+    Pick a difficult (easy, medium, or hard)
     You're given a set number of balls, which is shown next to the starting dot.
     You have to shoot the balls at the blocks, and try to break all of them with
     your balls.
